@@ -1,0 +1,38 @@
+/* Apply background color */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Style the heading */
+h1 {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Style the file input */
+input[type="file"] {
+    padding: 10px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+/* Style the audio player */
+audio {
+    width: 80%;
+    max-width: 400px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: white;
+}
