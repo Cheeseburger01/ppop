@@ -20,25 +20,46 @@
 
     <div class="main-content">
         <div class="sidebar">
+            <h3>Your Playlists</h3>
             <ul>
                 <li><a href="#">Playlist 1</a></li>
                 <li><a href="#">Playlist 2</a></li>
                 <li><a href="#">Playlist 3</a></li>
+                <li><a href="#">Playlist 4</a></li>
             </ul>
         </div>
 
         <div class="music-player">
-            <h2>Now Playing: Song Name</h2>
+            <div class="now-playing">
+                <img src="https://via.placeholder.com/150" alt="Album Cover" class="album-cover">
+                <div class="song-info">
+                    <h2>Now Playing: Song Name</h2>
+                    <p>Artist Name</p>
+                </div>
+            </div>
+
             <div class="controls">
                 <button class="prev">Prev</button>
                 <button class="play">Play</button>
                 <button class="next">Next</button>
+            </div>
+
+            <div class="progress-bar">
+                <input type="range" id="song-progress" value="0" max="100">
+            </div>
+
+            <div class="volume-control">
+                <label for="volume">Volume:</label>
+                <input type="range" id="volume" value="50" max="100">
             </div>
         </div>
     </div>
 
     <footer>
         <p>&copy; 2025 My Spotify-like App</p>
+        <div class="footer-links">
+            <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Help</a>
+        </div>
     </footer>
 
     <script src="script.js"></script>
