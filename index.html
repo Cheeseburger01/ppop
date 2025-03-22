@@ -3,64 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Spotify-like App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MP3 Playlist Player</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="logo">My Spotify</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Browse</a></li>
-                <li><a href="#">Your Library</a></li>
-            </ul>
-        </nav>
-    </header>
+    <h1>🎵 MP3 Playlist 🎶</h1>
 
-    <div class="main-content">
-        <div class="sidebar">
-            <h3>Your Playlists</h3>
-            <ul>
-                <li><a href="#">Playlist 1</a></li>
-                <li><a href="#">Playlist 2</a></li>
-                <li><a href="#">Playlist 3</a></li>
-                <li><a href="#">Playlist 4</a></li>
-            </ul>
-        </div>
-
-        <div class="music-player">
-            <div class="now-playing">
-                <img src="https://via.placeholder.com/150" alt="Album Cover" class="album-cover">
-                <div class="song-info">
-                    <h2>Now Playing: Song Name</h2>
-                    <p>Artist Name</p>
-                </div>
-            </div>
-
-            <div class="controls">
-                <button class="prev">Prev</button>
-                <button class="play">Play</button>
-                <button class="next">Next</button>
-            </div>
-
-            <div class="progress-bar">
-                <input type="range" id="song-progress" value="0" max="100">
-            </div>
-
-            <div class="volume-control">
-                <label for="volume">Volume:</label>
-                <input type="range" id="volume" value="50" max="100">
-            </div>
-        </div>
+    <div>
+        <button id="shuffleButton">Shuffle Playlist</button>
     </div>
 
-    <footer>
-        <p>&copy; 2025 My Spotify-like App</p>
-        <div class="footer-links">
-            <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Help</a>
-        </div>
-    </footer>
+    <ul id="playlist"></ul>
+
+    <audio id="audioPlayer" controls></audio>
 
     <script src="script.js"></script>
 </body>
