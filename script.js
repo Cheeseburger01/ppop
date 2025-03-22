@@ -1,14 +1,19 @@
-// List of MP3 files stored locally in the assets folder
 const songs = [
-    { name: "Song 1", url: "assets/mp3/song1.mp3" },
-    { name: "Song 2", url: "assets/mp3/song2.mp3" },
-    { name: "Song 3", url: "assets/mp3/song3.mp3" }
+    { url: "assets/mp3/relaxing-music.mp3" },
+    { url: "assets/mp3/summer-vibes.mp3" },
+    { url: "assets/mp3/chill-beats.mp3" }
 ];
 
 const audioPlayer = document.getElementById("audioPlayer");
 const playlistEl = document.getElementById("playlist");
 let currentIndex = 0;
 let isShuffle = false;
+
+// Function to extract the file name (without extension) from the URL
+function getSongName(filePath) {
+    const fileName = filePath.split('/').pop(); // Get the file name with extension
+    return fileName.replace('.mp3', ''); // Remove the .mp3 extension to use the name
+}
 
 // Create Playlist UI
 function createPlaylist() {
@@ -17,7 +22,7 @@ function createPlaylist() {
 
     songList.forEach((song, index) => {
         let li = document.createElement("li");
-        li.textContent = song.name;
+        li.textContent = getSongName(song.url); // Use the file name as the song name
         li.addEventListener("click", () => playSong(index));
         playlistEl.appendChild(li);
     });
