@@ -1,62 +1,74 @@
-let audioPlayer = document.getElementById("audioPlayer");
-let fileInput = document.getElementById("fileInput");
-let playlistEl = document.getElementById("playlist");
-let shuffleBtn = document.getElementById("shuffleBtn");
-
-let songs = [];
-let currentIndex = 0;
-let isShuffle = false;
-
-// Handle file selection
-fileInput.addEventListener("change", function(event) {
-    let files = Array.from(event.target.files); // Convert FileList to Array
-    songs = files.map(file => ({ name: file.name, url: URL.createObjectURL(file) }));
-    
-    if (songs.length > 0) {
-        createPlaylist();
-        playSong(0); // Start playing first song
-    }
-});
-
-// Create Playlist UI
-function createPlaylist() {
-    playlistEl.innerHTML = ""; // Clear existing playlist
-    songs.forEach((song, index) => {
-        let li = document.createElement("li");
-        li.textContent = song.name;
-        li.addEventListener("click", () => playSong(index));
-        playlistEl.appendChild(li);
-    });
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-// Play Selected Song
-function playSong(index) {
-    currentIndex = index;
-    audioPlayer.src = songs[currentIndex].url;
-    audioPlayer.play();
-    highlightPlaying();
+h1 {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-// Highlight Currently Playing Song
-function highlightPlaying() {
-    let items = playlistEl.getElementsByTagName("li");
-    for (let i = 0; i < items.length; i++) {
-        items[i].style.color = (i === currentIndex) ? "#ff4f81" : "black";
-        items[i].style.fontWeight = (i === currentIndex) ? "bold" : "normal";
-    }
+input[type="file"] {
+    padding: 10px;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
 }
 
-// Play Next Song When Current One Ends
-audioPlayer.addEventListener("ended", () => {
-    if (isShuffle) {
-        playSong(Math.floor(Math.random() * songs.length)); // Random song
-    } else {
-        playSong((currentIndex + 1) % songs.length); // Next song
-    }
-});
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff7eb3;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 10px;
+}
 
-// Toggle Shuffle Mode
-shuffleBtn.addEventListener("click", function() {
-    isShuffle = !isShuffle;
-    shuffleBtn.textContent = isShuffle ? "Shuffle: ON" : "Shuffle: OFF";
-});
+button:hover {
+    background: #ff4f81;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 80%;
+    max-width: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li:hover {
+    background: #f3f3f3;
+}
+
+audio {
+    width: 80%;
+    max-width: 400px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background: white;
+}
