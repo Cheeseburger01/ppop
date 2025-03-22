@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP3 Playlist Player</title>
-    <link rel="stylesheet" href="style.css">
+    <title>My Spotify-like App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>🎵 MP3 Playlist 🎶</h1>
+    <header>
+        <div class="logo">My Spotify</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Browse</a></li>
+                <li><a href="#">Your Library</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div>
-        <button id="shuffleButton">Shuffle Playlist</button>
+    <div class="main-content">
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Playlist 1</a></li>
+                <li><a href="#">Playlist 2</a></li>
+                <li><a href="#">Playlist 3</a></li>
+            </ul>
+        </div>
+
+        <div class="music-player">
+            <h2>Now Playing: Song Name</h2>
+            <div class="controls">
+                <button class="prev">Prev</button>
+                <button class="play">Play</button>
+                <button class="next">Next</button>
+            </div>
+        </div>
     </div>
 
-    <ul id="playlist"></ul>
-
-    <audio id="audioPlayer" controls></audio>
+    <footer>
+        <p>&copy; 2025 My Spotify-like App</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
