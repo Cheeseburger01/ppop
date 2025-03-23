@@ -1,70 +1,65 @@
 const songs = [
-    { url: "assets/mp3/relaxing-music.mp3" },
-    { url: "assets/mp3/summer-vibes.mp3" },
-    { url: "assets/mp3/chill-beats.mp3" }
+    "assets/mp3/relaxing-music.mp3",
+    "assets/mp3/summer-vibes.mp3",
+    "assets/mp3/chill-beats.mp3"
 ];
 
 const audioPlayer = document.getElementById("audioPlayer");
 const playlistEl = document.getElementById("playlist");
-let currentIndex = 0;
-let isShuffle = false;
+const shuffleButton = document.getElementById("shuffleButton");
 
-// Function to extract the file name (without extension) from the URL
+let isShuffle = false;
+let currentPlaylist = [...songs];
+
+// Function to extract song name from filename
 function getSongName(filePath) {
-    const fileName = filePath.split('/').pop(); // Get the file name with extension
-    return fileName.replace('.mp3', ''); // Remove the .mp3 extension to use the name
+    return filePath.split('/').pop().replace('.mp3', '').replace(/-/g, ' ');
 }
 
-// Create Playlist UI
+// Create the Playlist
 function createPlaylist() {
-    playlistEl.innerHTML = ""; // Clear existing playlist
-    const songList = isShuffle ? shuffleArray(songs) : songs;
-
-    songList.forEach((song, index) => {
+    playlistEl.innerHTML = "";
+    currentPlaylist.forEach((song, index) => {
         let li = document.createElement("li");
-        li.textContent = getSongName(song.url); // Use the file name as the song name
+        li.textContent = getSongName(song);
         li.addEventListener("click", () => playSong(index));
         playlistEl.appendChild(li);
     });
 }
 
-// Shuffle the playlist
-function shuffleArray(array) {
-    let shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
-    }
-    return shuffledArray;
-}
-
-// Play selected song
+// Play a Selected Song
 function playSong(index) {
-    currentIndex = index;
-    audioPlayer.src = songs[currentIndex].url;
+    audioPlayer.src = currentPlaylist[index];
     audioPlayer.play();
-    highlightPlaying();
+    highlightPlaying(index);
 }
 
 // Highlight Currently Playing Song
-function highlightPlaying() {
-    let items = playlistEl.getElementsByTagName("li");
+function highlightPlaying(index) {
+    const items = playlistEl.getElementsByTagName("li");
     for (let i = 0; i < items.length; i++) {
-        items[i].style.color = (i === currentIndex) ? "#ff4f81" : "black";
-        items[i].style.fontWeight = (i === currentIndex) ? "bold" : "normal";
+        items[i].classList.toggle("playing", i === index);
     }
 }
 
-// Play Next Song When Current One Ends
+// Shuffle Playlist
+shuffleButton.addEventListener("click", () => {
+    isShuffle = !isShuffle;
+    shuffleButton.textContent = isShuffle ? "Unshuffle" : "Shuffle";
+    currentPlaylist = isShuffle ? shuffleArray([...songs]) : [...songs];
+    createPlaylist();
+});
+
+// Shuffle Array Function
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+// Autoplay Next Song
 audioPlayer.addEventListener("ended", () => {
-    playSong((currentIndex + 1) % songs.length); // Next song
+    let currentIndex = currentPlaylist.indexOf(audioPlayer.src.split('/').pop());
+    playSong((currentIndex + 1) % currentPlaylist.length);
 });
 
-// Shuffle Button Click
-document.getElementById("shuffleButton").addEventListener("click", () => {
-    isShuffle = !isShuffle; // Toggle shuffle mode
-    createPlaylist(); // Update the playlist
-});
-
-// Initialize Playlist
+// Initialize
 createPlaylist();
